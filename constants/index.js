@@ -1,11 +1,13 @@
 import onboarding1 from "../assets/images/onboarding/Trust.png";
 import onboarding2 from "../assets/images/onboarding/Send_money_abroad.png";
 import onboarding3 from "../assets/images/onboarding/Receive_Money.png";
+import Get_Started from "../assets/images/auth/Get_Started.png";
 
 export const images = {
   onboarding1,
   onboarding2,
   onboarding3,
+  Get_Started,
 };
 
 export const icons = {};

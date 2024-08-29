@@ -33,7 +33,7 @@ const Onboarding = () => {
             >
               <Image
                 source={item.image}
-                className="w-full h-[350px] mt-[10vh]"
+                className="w-full h-[300px] mt-[10vh]"
                 resizeMode="contain"
               />
               <View className="flex flex-row items-center justify-center w-full mt-10">
@@ -49,7 +49,7 @@ const Onboarding = () => {
           title={isLastSlide ? "Get Started" : "Next"}
           handlePress={() =>
             isLastSlide
-              ? router.push("/(auth)/sign-up")
+              ? router.push("/(auth)/getstarted")
               : swiperRef.current?.scrollBy(1)
           }
           containerStyles="w-11/12 mt-10 mb-16 bg-[#304ffe]"
