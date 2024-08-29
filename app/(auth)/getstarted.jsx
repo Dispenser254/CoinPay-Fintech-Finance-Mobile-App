@@ -34,7 +34,7 @@ const GetStarted = () => {
 
           <CustomButton
             title={"Log In"}
-            handlePress={() => router.push("/(auth)/sign-in")}
+            handlePress={() => router.push("/(auth)/welcome")}
             containerStyles="w-full mt-4 bg-transparent border-neutral-300 border-[0.5px]"
             textStyles="text-[#304ffe]"
           />
