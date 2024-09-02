@@ -1,10 +1,11 @@
 import { View, Text, ImageBackground, Image } from "react-native";
 import React, { useState } from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import CustomButton from "../../components/CustomButton";
-import { icons, images } from "../../constants";
+import CustomButton from "../../../components/CustomButton";
+import { icons } from "../../../constants";
 import Slider from "@react-native-community/slider";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 
 const Home = () => {
   const [loanLimit, setLoanLimit] = useState(5000);
@@ -13,9 +14,9 @@ const Home = () => {
     <SafeAreaView className="flex-1">
       {/* First Block */}
       <LinearGradient
-        colors={["#4267B2", "#4267B2", "#2D88FF"]}
-        start={{ x: 1, y: 0.2 }} // Start from top left
-        end={{ x: 0.3, y: 1 }} // End at top right
+        colors={["#0766ff", "#0766ff", "#3a85ff"]}
+        start={{ x: 1, y: 0.2 }}
+        end={{ x: 0.3, y: 1 }}
         className="relative z-0 w-full pt-[8vh] h-[60vh] rounded-b-[50px]"
       >
         <View className="flex flex-row items-center justify-between px-4 w-full mb-2">
@@ -84,7 +85,8 @@ const Home = () => {
             We are ready to help you for your awesome work. Let's invest there
           </Text>
           <CustomButton
-            containerStyles="py-4 w-full bg-blue-500"
+            containerStyles="py-4 w-full bg-primary"
+            handlePress={() => router.push("/loan")}
             textStyles="font-JakartaSemiBold text-white"
             title="Apply for a Loan"
           />

@@ -52,8 +52,8 @@ const Onboarding = () => {
               ? router.push("/(auth)/getstarted")
               : swiperRef.current?.scrollBy(1)
           }
-          containerStyles="w-11/12 mt-10 mb-16 bg-[#304ffe]"
-          textStyles="text-white"
+          containerStyles="w-11/12 mt-10 mb-16 bg-primary"
+          textStyles="font-JakartaSemiBold text-lg text-white"
         />
       </View>
     </SafeAreaView>

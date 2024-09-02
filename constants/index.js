@@ -12,6 +12,7 @@ import Calculator from "../assets/icons/calculator.png";
 import Analytics from "../assets/icons/analytics.png";
 import Chat from "../assets/icons/speech-bubble.png";
 import User from "../assets/icons/user.png";
+import Check from "../assets/icons/check.png";
 import HomeBox from "../assets/images/tabs/background.png";
 
 export const images = {
@@ -33,6 +34,7 @@ export const icons = {
   SavingsHistory,
   Deposit,
   User,
+  Check,
 };
 
 export const onboarding = [

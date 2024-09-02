@@ -1,7 +1,7 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import { icons } from "../../constants";
+import { icons } from "../../../constants";
 
 const TabIcon = ({ icon, name, color, focused }) => {
   return (
@@ -28,10 +28,10 @@ const Layout = () => {
       initialRouteName="index"
       screenOptions={{
         tabBarActiveTintColor: "white", // Active tab color
-        tabBarInactiveTintColor: "#B0B3B8", // Inactive tab color (light grey)
+        tabBarInactiveTintColor: "#9b9ea1", // Inactive tab color (light grey)
         tabBarShowLabel: false, // Hides the label to show only icons
         tabBarStyle: {
-          backgroundColor: "#1877F2", // Facebook blue background for tab bar
+          backgroundColor: "#0766ff", // Facebook blue background for tab bar
           height: 78,
           overflow: "hidden",
           display: "flex",

@@ -28,15 +28,15 @@ const GetStarted = () => {
           <CustomButton
             title={"Sign Up"}
             handlePress={() => router.push("/(auth)/sign-up")}
-            containerStyles="w-full bg-[#304ffe] mt-8"
-            textStyles="text-white"
+            containerStyles="w-full mt-8 bg-primary"
+            textStyles="font-JakartaSemiBold text-lg text-white"
           />
 
           <CustomButton
             title={"Log In"}
             handlePress={() => router.push("/(auth)/welcome")}
             containerStyles="w-full mt-4 bg-transparent border-neutral-300 border-[0.5px]"
-            textStyles="text-[#304ffe]"
+            textStyles="font-JakartaSemiBold text-lg text-primary"
           />
         </View>
 
