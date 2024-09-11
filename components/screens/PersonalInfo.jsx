@@ -1,116 +1,191 @@
-import { View, Text, ScrollView, TextInput } from "react-native";
-import React, { useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useState } from "react";
 
-const PersonalInfo = () => {
-  const [fullName, setFullName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [idCardNumber, setIdCardNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [gender, setGender] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [emailAddress, setEmailAddress] = useState("");
+const PersonalInfo = ({ personalFormData, handleInputChange, errors }) => {
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const inputStyle = (error) =>
+    `border ${error ? "border-red-500" : "border-gray-300"} p-2 rounded-lg font-Jakarta`;
+
+  const handleDateChange = (event, date) => {
+    if (event.type === "set" && date) {
+      setSelectedDate(date);
+      handleInputChange("dateOfBirth", date.toISOString().split("T")[0]); // Store in YYYY-MM-DD format
+    }
+    setDatePickerVisible(false);
+  };
 
   return (
     <ScrollView className="p-4 bg-background">
       <View className="mb-4">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Full Name</Text>
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          Full Name<Text className="text-error">*</Text>
+        </Text>
         <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={fullName}
-          onChangeText={setFullName}
+          className={inputStyle(errors.fullName)}
+          value={personalFormData.fullName}
+          onChangeText={(text) => handleInputChange("fullName", text)}
           placeholder="Enter your full name"
         />
-      </View>
-      <View className="mb-4">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Date of Birth</Text>
-        <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={dateOfBirth}
-          onChangeText={setDateOfBirth}
-          placeholder="Enter your date of birth"
-          keyboardType="numeric"
-        />
+        {errors.fullName && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.fullName}
+          </Text>
+        )}
       </View>
       <View className="mb-4">
         <Text className="text-lg font-JakartaSemiBold mb-2">
-          ID Card Number
+          Date of Birth<Text className="text-error">*</Text>
+        </Text>
+        <TouchableOpacity
+          onPress={() => setDatePickerVisible(true)}
+          className={inputStyle(errors.dateOfBirth)}
+        >
+          <TextInput
+            editable={false}
+            placeholder="Enter Date of Birth"
+            className="text-neutral-900"
+            value={selectedDate.toDateString()}
+          />
+        </TouchableOpacity>
+        {datePickerVisible && (
+          <DateTimePicker
+            mode="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+          />
+        )}
+        {errors.dateOfBirth && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.dateOfBirth}
+          </Text>
+        )}
+      </View>
+      <View className="mb-4">
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          ID Card Number<Text className="text-error">*</Text>
         </Text>
         <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={idCardNumber}
-          onChangeText={setIdCardNumber}
+          className={inputStyle(errors.idCardNumber)}
+          value={personalFormData.idCardNumber}
+          onChangeText={(text) => handleInputChange("idCardNumber", text)}
           placeholder="Enter your ID card number"
           keyboardType="numeric"
         />
-      </View>
-      <View className="mb-4">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Phone Number</Text>
-        <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={phoneNumber}
-          onChangeText={setPhoneNumber}
-          placeholder="Enter your phone number"
-          keyboardType="phone-pad"
-        />
-      </View>
-      <View className="mb-4">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Email Address</Text>
-        <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={emailAddress}
-          onChangeText={setEmailAddress}
-          placeholder="Enter your email address"
-          keyboardType="email-address"
-        />
-      </View>
-      <View className="mb-4">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Address</Text>
-        <TextInput
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          value={address}
-          onChangeText={setAddress}
-          placeholder="Enter your address"
-        />
+        {errors.idCardNumber && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.idCardNumber}
+          </Text>
+        )}
       </View>
       <View className="mb-4">
         <Text className="text-lg font-JakartaSemiBold mb-2">
-          Marital Status
+          Phone Number<Text className="text-error">*</Text>
         </Text>
-        <View style="border border-gray-300 rounded-lg">
+        <TextInput
+          className={inputStyle(errors.phoneNumber)}
+          value={personalFormData.phoneNumber}
+          onChangeText={(text) => handleInputChange("phoneNumber", text)}
+          placeholder="Enter your phone number"
+          keyboardType="phone-pad"
+        />
+        {errors.phoneNumber && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.phoneNumber}
+          </Text>
+        )}
+      </View>
+      <View className="mb-4">
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          Email Address<Text className="text-error">*</Text>
+        </Text>
+        <TextInput
+          className={inputStyle(errors.emailAddress)}
+          value={personalFormData.emailAddress}
+          onChangeText={(text) => handleInputChange("emailAddress", text)}
+          placeholder="Enter your email address"
+          keyboardType="email-address"
+        />
+        {errors.emailAddress && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.emailAddress}
+          </Text>
+        )}
+      </View>
+      <View className="mb-4">
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          Address<Text className="text-error">*</Text>
+        </Text>
+        <TextInput
+          className={inputStyle(errors.address)}
+          value={personalFormData.address}
+          onChangeText={(text) => handleInputChange("address", text)}
+          placeholder="Enter your address"
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical="top"
+        />
+        {errors.address && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.address}
+          </Text>
+        )}
+      </View>
+      <View className="mb-4">
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          Marital Status<Text className="text-error">*</Text>
+        </Text>
+        <View className={inputStyle(errors.maritalStatus)}>
           <Picker
-            selectedValue={maritalStatus}
-            onValueChange={(itemValue) => setMaritalStatus(itemValue)}
-            itemStyle={{ fontFamily: "Jakarta", fontSize: 50 }}
+            selectedValue={personalFormData.maritalStatus}
+            onValueChange={(itemValue) =>
+              handleInputChange("maritalStatus", itemValue)
+            }
           >
-            <Picker.Item
-              label="Select Marital Status"
-              value=""
-              style={{ fontFamily: "Jakarta" }}
-            />
+            <Picker.Item label="Select Marital Status" value="" />
             <Picker.Item label="Single" value="single" />
             <Picker.Item label="Married" value="married" />
             <Picker.Item label="Divorced" value="divorced" />
           </Picker>
         </View>
+        {errors.maritalStatus && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.maritalStatus}
+          </Text>
+        )}
       </View>
       <View className="mb-4 font-Jakarta">
-        <Text className="text-lg font-JakartaSemiBold mb-2">Gender</Text>
-        <Picker
-          selectedValue={gender}
-          className="border border-gray-300 p-2 rounded-lg font-Jakarta"
-          onValueChange={(itemValue) => setGender(itemValue)}
-        >
-          <Picker.Item
-            label="Select Gender"
-            value=""
-            className="font-Jakarta"
-          />
-          <Picker.Item label="Male" value="male" />
-          <Picker.Item label="Female" value="female" />
-          <Picker.Item label="Other" value="other" />
-        </Picker>
+        <Text className="text-lg font-JakartaSemiBold mb-2">
+          Gender<Text className="text-error">*</Text>
+        </Text>
+        <View className={inputStyle(errors.gender)}>
+          <Picker
+            selectedValue={personalFormData.gender}
+            className="border border-gray-300 p-2 rounded-lg"
+            onValueChange={(itemValue) =>
+              handleInputChange("gender", itemValue)
+            }
+          >
+            <Picker.Item label="Select Gender" value="" />
+            <Picker.Item label="Male" value="male" />
+            <Picker.Item label="Female" value="female" />
+            <Picker.Item label="Other" value="other" />
+          </Picker>
+        </View>
+        {errors.gender && (
+          <Text className="text-error font-Jakarta text-xs">
+            {errors.gender}
+          </Text>
+        )}
       </View>
     </ScrollView>
   );

@@ -1,6 +1,6 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { icons } from "../../../constants";
 
 const TabIcon = ({ icon, name, color, focused }) => {
@@ -68,13 +68,26 @@ const Layout = () => {
       <Tabs.Screen
         name="spending"
         options={{
-          title: "Spending",
-          headerShown: false,
+          title: "STAGES",
+          headerTitleStyle: {
+            fontFamily: "Jakarta-ExtraBold",
+            fontSize: 30,
+            marginBottom: 10,
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.push("/(tabs)/home")}>
+              <Image
+                source={icons.LeftArrow}
+                resizeMode="contain"
+                className="w-6 h-6 ml-4 mr-4"
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
               icon={icons.Analytics}
               color={color}
-              name="Spending"
+              name="Stages"
               focused={focused}
             />
           ),
@@ -83,8 +96,21 @@ const Layout = () => {
       <Tabs.Screen
         name="chat"
         options={{
-          title: "Chat",
-          headerShown: false,
+          title: "Messages",
+          headerTitleStyle: {
+            fontFamily: "Jakarta-ExtraBold",
+            fontSize: 30,
+            marginBottom: 10,
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.push("/(tabs)/home")}>
+              <Image
+                source={icons.LeftArrow}
+                resizeMode="contain"
+                className="w-6 h-6 ml-4 mr-4"
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
               icon={icons.Chat}

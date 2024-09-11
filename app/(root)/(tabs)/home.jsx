@@ -1,4 +1,10 @@
-import { View, Text, ImageBackground, Image } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import SafeAreaView from "react-native-safe-area-view";
 import CustomButton from "../../../components/CustomButton";
@@ -9,6 +15,7 @@ import { router } from "expo-router";
 
 const Home = () => {
   const [loanLimit, setLoanLimit] = useState(5000);
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
 
   return (
     <SafeAreaView className="flex-1">
@@ -34,7 +41,22 @@ const Home = () => {
           <Text className="font-JakartaBold text-xl text-white">
             Your Credit Balance
           </Text>
-          <Text className="text-3xl font-Jakarta text-white mt-2">Kshs. 0</Text>
+          <View className="flex flex-row items-center mt-2 gap-x-6">
+            <Text className="text-3xl font-Jakarta text-white">
+              {"Kshs."}
+              {isBalanceVisible ? "0.00" : "****"}
+            </Text>
+            <TouchableOpacity
+              onPress={() => setIsBalanceVisible(!isBalanceVisible)}
+            >
+              <Image
+                source={isBalanceVisible ? icons.EyeSlash : icons.Eye} // Change icon based on state
+                resizeMode="contain"
+                className="w-7 h-7"
+                tintColor="#ffffff"
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </LinearGradient>
 
